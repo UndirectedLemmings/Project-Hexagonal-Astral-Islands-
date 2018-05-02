@@ -1,0 +1,11 @@
+D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\bin\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.deps.json
+D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\bin\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.runtimeconfig.json
+D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\bin\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.runtimeconfig.dev.json
+D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\bin\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.dll
+D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\bin\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.pdb
+D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\obj\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.csprojResolveAssemblyReference.cache
+D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\obj\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.csproj.CoreCompileInputs.cache
+D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\obj\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.AssemblyInfoInputs.cache
+D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\obj\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.AssemblyInfo.cs
+D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\obj\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.dll
+D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\obj\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.pdb
