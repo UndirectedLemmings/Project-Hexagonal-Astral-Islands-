@@ -9,3 +9,4 @@ D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\P
 D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\obj\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.AssemblyInfo.cs
 D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\obj\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.dll
 D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\obj\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.pdb
+D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
