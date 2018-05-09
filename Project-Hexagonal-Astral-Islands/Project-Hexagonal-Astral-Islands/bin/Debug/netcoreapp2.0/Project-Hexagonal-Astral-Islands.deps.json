@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "3cdd69c293afd4862483283bfdbe963a86a72454"
+    "signature": "a9da27c14ab5c312b2ed6ac8d517d91bd3fce216"
   },
   "compilationOptions": {
     "defines": [
@@ -29,7 +29,9 @@
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.3",
           "NHibernate": "5.1.1",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "11.0.2",
+          "SixLabors.ImageSharp": "1.0.0-beta0003",
+          "SixLabors.ImageSharp.Drawing": "1.0.0-beta0003"
         },
         "runtime": {
           "Project-Hexagonal-Astral-Islands.dll": {}
@@ -1296,7 +1298,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Http.Features": "2.0.2",
           "System.Buffers": "4.4.0",
-          "System.Numerics.Vectors": "4.4.0"
+          "System.Numerics.Vectors": "4.5.0-preview1-26216-02"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll": {}
@@ -1367,7 +1369,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Http.Extensions": "2.0.2",
           "Microsoft.Extensions.Options": "2.0.1",
-          "System.Numerics.Vectors": "4.4.0"
+          "System.Numerics.Vectors": "4.5.0-preview1-26216-02"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.AspNetCore.WebSockets.dll": {}
@@ -2205,7 +2207,7 @@
       },
       "Microsoft.Extensions.Primitives/2.0.0": {
         "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "4.4.0"
+          "System.Runtime.CompilerServices.Unsafe": "4.5.0-preview1-26216-02"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll": {}
@@ -2727,6 +2729,78 @@
             "rid": "win-x86",
             "assetType": "native"
           }
+        }
+      },
+      "SixLabors.Core/1.0.0-beta0005": {
+        "runtime": {
+          "lib/netcoreapp2.0/SixLabors.Core.dll": {}
+        },
+        "compile": {
+          "lib/netcoreapp2.0/SixLabors.Core.dll": {}
+        }
+      },
+      "SixLabors.Fonts/1.0.0-beta0003": {
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0005",
+          "System.Collections.Immutable": "1.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.Fonts.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.Fonts.dll": {}
+        }
+      },
+      "SixLabors.ImageSharp/1.0.0-beta0003": {
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0005",
+          "System.Buffers": "4.4.0",
+          "System.Memory": "4.5.0-preview1-26216-02",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.0-preview1-26216-02"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.ImageSharp.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.ImageSharp.dll": {}
+        }
+      },
+      "SixLabors.ImageSharp.Drawing/1.0.0-beta0003": {
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0005",
+          "SixLabors.ImageSharp": "1.0.0-beta0003",
+          "SixLabors.Shapes": "1.0.0-beta0004",
+          "SixLabors.Shapes.Text": "1.0.0-beta0004"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.ImageSharp.Drawing.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.ImageSharp.Drawing.dll": {}
+        }
+      },
+      "SixLabors.Shapes/1.0.0-beta0004": {
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0005",
+          "System.Buffers": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.Shapes.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.Shapes.dll": {}
+        }
+      },
+      "SixLabors.Shapes.Text/1.0.0-beta0004": {
+        "dependencies": {
+          "SixLabors.Fonts": "1.0.0-beta0003",
+          "SixLabors.Shapes": "1.0.0-beta0004"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.Shapes.Text.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.Shapes.Text.dll": {}
         }
       },
       "SQLitePCLRaw.bundle_green/1.1.7": {
@@ -3280,6 +3354,18 @@
           "System.Runtime": "4.3.0"
         }
       },
+      "System.Memory/4.5.0-preview1-26216-02": {
+        "dependencies": {
+          "System.Numerics.Vectors": "4.5.0-preview1-26216-02",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.0-preview1-26216-02"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Memory.dll": {}
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Memory.dll": {}
+        }
+      },
       "System.Net.Http/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.0.0",
@@ -3419,7 +3505,14 @@
           "System.Threading.Tasks": "4.3.0"
         }
       },
-      "System.Numerics.Vectors/4.4.0": {},
+      "System.Numerics.Vectors/4.5.0-preview1-26216-02": {
+        "runtime": {
+          "lib/netstandard2.0/System.Numerics.Vectors.dll": {}
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Numerics.Vectors.dll": {}
+        }
+      },
       "System.ObjectModel/4.3.0": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -3546,7 +3639,7 @@
           "Microsoft.NETCore.Targets": "1.1.0"
         }
       },
-      "System.Runtime.CompilerServices.Unsafe/4.4.0": {
+      "System.Runtime.CompilerServices.Unsafe/4.5.0-preview1-26216-02": {
         "runtime": {
           "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
         },
@@ -4218,7 +4311,6 @@
           "ref/netcoreapp2.0/System.Net.WebSockets.Client.dll": {},
           "ref/netcoreapp2.0/System.Net.WebSockets.dll": {},
           "ref/netcoreapp2.0/System.Net.dll": {},
-          "ref/netcoreapp2.0/System.Numerics.Vectors.dll": {},
           "ref/netcoreapp2.0/System.Numerics.dll": {},
           "ref/netcoreapp2.0/System.ObjectModel.dll": {},
           "ref/netcoreapp2.0/System.Reflection.DispatchProxy.dll": {},
@@ -5738,6 +5830,48 @@
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
     },
+    "SixLabors.Core/1.0.0-beta0005": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RnLbRe5J9kjSH+EDA8a58shzI+nNt96aJw1WgXxdn+DSc/ryirdEPO/2EIITvaSX6Nk9Lepcj8EOVfq16fhUmg==",
+      "path": "sixlabors.core/1.0.0-beta0005",
+      "hashPath": "sixlabors.core.1.0.0-beta0005.nupkg.sha512"
+    },
+    "SixLabors.Fonts/1.0.0-beta0003": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Cpq+1P2koooh+eHyVmKn+MqvbhgVf1uF3+BtXDtobvM1fTctyplXBg30RGvmG4TAaxYt/VFfpggvHTDl+Dyxvw==",
+      "path": "sixlabors.fonts/1.0.0-beta0003",
+      "hashPath": "sixlabors.fonts.1.0.0-beta0003.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp/1.0.0-beta0003": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3/lUzXxdHY6uX7v0e02tulpt7xUUtkicrizHdFnBS3oNk4o/sL0Sme6kRIWPsWLkEJ+6R3MNpds88BnZPmaiww==",
+      "path": "sixlabors.imagesharp/1.0.0-beta0003",
+      "hashPath": "sixlabors.imagesharp.1.0.0-beta0003.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp.Drawing/1.0.0-beta0003": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-diWSFuvjlHLS05j2so2r7K4WwdW5GjLR5yAYonV7ozzJqFsCa4SO2Bdtz5lnGuRLdh6SCVcm9Ai7U/Ay/9iCPw==",
+      "path": "sixlabors.imagesharp.drawing/1.0.0-beta0003",
+      "hashPath": "sixlabors.imagesharp.drawing.1.0.0-beta0003.nupkg.sha512"
+    },
+    "SixLabors.Shapes/1.0.0-beta0004": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Q6mdTnI6VJV1KbvH7LmHzTeThfdONJAcbI19gM5p2xIqNn6P5CBFoRCQvQ7RLvZMIOCSumf967tS20tWah/LsQ==",
+      "path": "sixlabors.shapes/1.0.0-beta0004",
+      "hashPath": "sixlabors.shapes.1.0.0-beta0004.nupkg.sha512"
+    },
+    "SixLabors.Shapes.Text/1.0.0-beta0004": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fkxFGdGTlMb5VWTYziA6W7lMzf8pbkOeqixzemLtlEDKcDHPe7lJmT1QX+JUTCNad3GZ/gGKQZtuSyA7GrJJxQ==",
+      "path": "sixlabors.shapes.text/1.0.0-beta0004",
+      "hashPath": "sixlabors.shapes.text.1.0.0-beta0004.nupkg.sha512"
+    },
     "SQLitePCLRaw.bundle_green/1.1.7": {
       "type": "package",
       "serviceable": true,
@@ -6053,6 +6187,13 @@
       "path": "system.linq.queryable/4.0.1",
       "hashPath": "system.linq.queryable.4.0.1.nupkg.sha512"
     },
+    "System.Memory/4.5.0-preview1-26216-02": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/qkNiTfseQ35guuSKxqw6cjEYnh+ijwI941QS5669VtTSSXOoyHWUO6JARIvSQ+A2yYFVdKEvTkKrMfaqdyOaw==",
+      "path": "system.memory/4.5.0-preview1-26216-02",
+      "hashPath": "system.memory.4.5.0-preview1-26216-02.nupkg.sha512"
+    },
     "System.Net.Http/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -6095,12 +6236,12 @@
       "path": "system.net.sockets/4.3.0",
       "hashPath": "system.net.sockets.4.3.0.nupkg.sha512"
     },
-    "System.Numerics.Vectors/4.4.0": {
+    "System.Numerics.Vectors/4.5.0-preview1-26216-02": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-UiLzLW+Lw6HLed1Hcg+8jSRttrbuXv7DANVj0DkL9g6EnnzbL75EB7EWsw5uRbhxd/4YdG8li5XizGWepmG3PQ==",
-      "path": "system.numerics.vectors/4.4.0",
-      "hashPath": "system.numerics.vectors.4.4.0.nupkg.sha512"
+      "sha512": "sha512-FGIOma5l5mVHfnG8Ry5k3WqjWeDGFp1381xGpqwyUBWLs6kzm9Jbss1dUIRoOG4SU55nC0/28toJcq1sYfxPRw==",
+      "path": "system.numerics.vectors/4.5.0-preview1-26216-02",
+      "hashPath": "system.numerics.vectors.4.5.0-preview1-26216-02.nupkg.sha512"
     },
     "System.ObjectModel/4.3.0": {
       "type": "package",
@@ -6200,12 +6341,12 @@
       "path": "system.runtime/4.3.0",
       "hashPath": "system.runtime.4.3.0.nupkg.sha512"
     },
-    "System.Runtime.CompilerServices.Unsafe/4.4.0": {
+    "System.Runtime.CompilerServices.Unsafe/4.5.0-preview1-26216-02": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-9dLLuBxr5GNmOfl2jSMcsHuteEg32BEfUotmmUkmZjpR3RpVHE8YQwt0ow3p6prwA1ME8WqDVZqrr8z6H8G+Kw==",
-      "path": "system.runtime.compilerservices.unsafe/4.4.0",
-      "hashPath": "system.runtime.compilerservices.unsafe.4.4.0.nupkg.sha512"
+      "sha512": "sha512-YH6QzLUg6VzyejRsW9no/xlulcpKjfOC27jWmijyhw8A42ldukXHQDSaE0CP+khK0m2iqAaXoQ0BU49FUDw7Lw==",
+      "path": "system.runtime.compilerservices.unsafe/4.5.0-preview1-26216-02",
+      "hashPath": "system.runtime.compilerservices.unsafe.4.5.0-preview1-26216-02.nupkg.sha512"
     },
     "System.Runtime.Extensions/4.3.0": {
       "type": "package",

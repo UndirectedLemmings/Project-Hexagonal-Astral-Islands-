@@ -22,7 +22,7 @@ namespace Project_Hexagonal_Astral_Islands.Controllers
 
 
         // GET: /Map/
-        public async Task<string> Index()
+        public async Task<IActionResult> Index()
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);
             string result = "";
@@ -46,12 +46,14 @@ namespace Project_Hexagonal_Astral_Islands.Controllers
             }
             map = maps.Select(u => u).Where(u => u.ID == user.my_map_id).First();
 
-                foreach (var kvp in map.Hcd)
+                /*foreach (var kvp in map.Hcd)
                 {
                     result = result + kvp.Key.ToString() + ": " + kvp.Value.ToString() + "\n";
-                }
+                }*/
+
+                ViewData["MapLoc"] = ImageGen.GenerateImage(map);
             }
-            
+
             /* 
              string result = "Пользователь не обнаружен";
              if (user != null) {
@@ -60,7 +62,7 @@ namespace Project_Hexagonal_Astral_Islands.Controllers
                  }
 
              }*/
-            return result;
+            return View();
         }
 
            

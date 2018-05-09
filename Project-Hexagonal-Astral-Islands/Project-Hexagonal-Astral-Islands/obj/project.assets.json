@@ -3168,6 +3168,84 @@
           }
         }
       },
+      "SixLabors.Core/1.0.0-beta0005": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp2.0/SixLabors.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/SixLabors.Core.dll": {}
+        }
+      },
+      "SixLabors.Fonts/1.0.0-beta0003": {
+        "type": "package",
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0004",
+          "System.Collections.Immutable": "1.4.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.Fonts.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.Fonts.dll": {}
+        }
+      },
+      "SixLabors.ImageSharp/1.0.0-beta0003": {
+        "type": "package",
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0005",
+          "System.Buffers": "4.4.0",
+          "System.Memory": "4.5.0-preview1-26216-02",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.0-preview1-26216-02"
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.ImageSharp.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.ImageSharp.dll": {}
+        }
+      },
+      "SixLabors.ImageSharp.Drawing/1.0.0-beta0003": {
+        "type": "package",
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0005",
+          "SixLabors.ImageSharp": "1.0.0-beta0003",
+          "SixLabors.Shapes": "1.0.0-beta0004",
+          "SixLabors.Shapes.Text": "1.0.0-beta0004"
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.ImageSharp.Drawing.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.ImageSharp.Drawing.dll": {}
+        }
+      },
+      "SixLabors.Shapes/1.0.0-beta0004": {
+        "type": "package",
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0005",
+          "System.Buffers": "4.4.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.Shapes.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.Shapes.dll": {}
+        }
+      },
+      "SixLabors.Shapes.Text/1.0.0-beta0004": {
+        "type": "package",
+        "dependencies": {
+          "SixLabors.Fonts": "1.0.0-beta0003",
+          "SixLabors.Shapes": "1.0.0-beta0004"
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.Shapes.Text.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.Shapes.Text.dll": {}
+        }
+      },
       "SQLitePCLRaw.bundle_green/1.1.7": {
         "type": "package",
         "dependencies": {
@@ -3918,6 +3996,19 @@
           "lib/netstandard1.3/System.Linq.Queryable.dll": {}
         }
       },
+      "System.Memory/4.5.0-preview1-26216-02": {
+        "type": "package",
+        "dependencies": {
+          "System.Numerics.Vectors": "4.5.0-preview1-26216-02",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.0-preview1-26216-02"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Memory.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Memory.dll": {}
+        }
+      },
       "System.Net.Http/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -4081,13 +4172,13 @@
           "ref/netstandard1.3/System.Net.Sockets.dll": {}
         }
       },
-      "System.Numerics.Vectors/4.4.0": {
+      "System.Numerics.Vectors/4.5.0-preview1-26216-02": {
         "type": "package",
         "compile": {
-          "ref/netcoreapp2.0/_._": {}
+          "ref/netstandard2.0/System.Numerics.Vectors.dll": {}
         },
         "runtime": {
-          "lib/netcoreapp2.0/_._": {}
+          "lib/netstandard2.0/System.Numerics.Vectors.dll": {}
         }
       },
       "System.ObjectModel/4.3.0": {
@@ -4298,7 +4389,7 @@
           "ref/netstandard1.5/System.Runtime.dll": {}
         }
       },
-      "System.Runtime.CompilerServices.Unsafe/4.4.0": {
+      "System.Runtime.CompilerServices.Unsafe/4.5.0-preview1-26216-02": {
         "type": "package",
         "compile": {
           "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
@@ -8487,6 +8578,88 @@
         "version.txt"
       ]
     },
+    "SixLabors.Core/1.0.0-beta0005": {
+      "sha512": "RnLbRe5J9kjSH+EDA8a58shzI+nNt96aJw1WgXxdn+DSc/ryirdEPO/2EIITvaSX6Nk9Lepcj8EOVfq16fhUmg==",
+      "type": "package",
+      "path": "sixlabors.core/1.0.0-beta0005",
+      "files": [
+        "lib/netcoreapp2.0/SixLabors.Core.dll",
+        "lib/netcoreapp2.0/SixLabors.Core.xml",
+        "lib/netstandard1.1/SixLabors.Core.dll",
+        "lib/netstandard1.1/SixLabors.Core.xml",
+        "sixlabors.core.1.0.0-beta0005.nupkg.sha512",
+        "sixlabors.core.nuspec"
+      ]
+    },
+    "SixLabors.Fonts/1.0.0-beta0003": {
+      "sha512": "Cpq+1P2koooh+eHyVmKn+MqvbhgVf1uF3+BtXDtobvM1fTctyplXBg30RGvmG4TAaxYt/VFfpggvHTDl+Dyxvw==",
+      "type": "package",
+      "path": "sixlabors.fonts/1.0.0-beta0003",
+      "files": [
+        "lib/netstandard1.1/SixLabors.Fonts.dll",
+        "lib/netstandard1.1/SixLabors.Fonts.xml",
+        "lib/netstandard1.3/SixLabors.Fonts.dll",
+        "lib/netstandard1.3/SixLabors.Fonts.xml",
+        "lib/netstandard2.0/SixLabors.Fonts.dll",
+        "lib/netstandard2.0/SixLabors.Fonts.xml",
+        "sixlabors.fonts.1.0.0-beta0003.nupkg.sha512",
+        "sixlabors.fonts.nuspec"
+      ]
+    },
+    "SixLabors.ImageSharp/1.0.0-beta0003": {
+      "sha512": "3/lUzXxdHY6uX7v0e02tulpt7xUUtkicrizHdFnBS3oNk4o/sL0Sme6kRIWPsWLkEJ+6R3MNpds88BnZPmaiww==",
+      "type": "package",
+      "path": "sixlabors.imagesharp/1.0.0-beta0003",
+      "files": [
+        "lib/netstandard1.1/SixLabors.ImageSharp.dll",
+        "lib/netstandard1.1/SixLabors.ImageSharp.xml",
+        "lib/netstandard1.3/SixLabors.ImageSharp.dll",
+        "lib/netstandard1.3/SixLabors.ImageSharp.xml",
+        "lib/netstandard2.0/SixLabors.ImageSharp.dll",
+        "lib/netstandard2.0/SixLabors.ImageSharp.xml",
+        "sixlabors.imagesharp.1.0.0-beta0003.nupkg.sha512",
+        "sixlabors.imagesharp.nuspec"
+      ]
+    },
+    "SixLabors.ImageSharp.Drawing/1.0.0-beta0003": {
+      "sha512": "diWSFuvjlHLS05j2so2r7K4WwdW5GjLR5yAYonV7ozzJqFsCa4SO2Bdtz5lnGuRLdh6SCVcm9Ai7U/Ay/9iCPw==",
+      "type": "package",
+      "path": "sixlabors.imagesharp.drawing/1.0.0-beta0003",
+      "files": [
+        "lib/netstandard1.1/SixLabors.ImageSharp.Drawing.dll",
+        "lib/netstandard1.1/SixLabors.ImageSharp.Drawing.xml",
+        "lib/netstandard2.0/SixLabors.ImageSharp.Drawing.dll",
+        "lib/netstandard2.0/SixLabors.ImageSharp.Drawing.xml",
+        "sixlabors.imagesharp.drawing.1.0.0-beta0003.nupkg.sha512",
+        "sixlabors.imagesharp.drawing.nuspec"
+      ]
+    },
+    "SixLabors.Shapes/1.0.0-beta0004": {
+      "sha512": "Q6mdTnI6VJV1KbvH7LmHzTeThfdONJAcbI19gM5p2xIqNn6P5CBFoRCQvQ7RLvZMIOCSumf967tS20tWah/LsQ==",
+      "type": "package",
+      "path": "sixlabors.shapes/1.0.0-beta0004",
+      "files": [
+        "lib/netstandard1.1/SixLabors.Shapes.dll",
+        "lib/netstandard1.1/SixLabors.Shapes.xml",
+        "lib/netstandard2.0/SixLabors.Shapes.dll",
+        "lib/netstandard2.0/SixLabors.Shapes.xml",
+        "sixlabors.shapes.1.0.0-beta0004.nupkg.sha512",
+        "sixlabors.shapes.nuspec"
+      ]
+    },
+    "SixLabors.Shapes.Text/1.0.0-beta0004": {
+      "sha512": "fkxFGdGTlMb5VWTYziA6W7lMzf8pbkOeqixzemLtlEDKcDHPe7lJmT1QX+JUTCNad3GZ/gGKQZtuSyA7GrJJxQ==",
+      "type": "package",
+      "path": "sixlabors.shapes.text/1.0.0-beta0004",
+      "files": [
+        "lib/netstandard1.1/SixLabors.Shapes.Text.dll",
+        "lib/netstandard1.1/SixLabors.Shapes.Text.xml",
+        "lib/netstandard2.0/SixLabors.Shapes.Text.dll",
+        "lib/netstandard2.0/SixLabors.Shapes.Text.xml",
+        "sixlabors.shapes.text.1.0.0-beta0004.nupkg.sha512",
+        "sixlabors.shapes.text.nuspec"
+      ]
+    },
     "SQLitePCLRaw.bundle_green/1.1.7": {
       "sha512": "Kw+n4CUhQ8S4YAPmpRUldO8S7c4LU7HHukJF0v5Sfggf8Ia9YVdIh0dYkMvKvS+DTX+OBORSMqPM0CGfAzFtVA==",
       "type": "package",
@@ -10307,6 +10480,37 @@
         "system.linq.queryable.nuspec"
       ]
     },
+    "System.Memory/4.5.0-preview1-26216-02": {
+      "sha512": "/qkNiTfseQ35guuSKxqw6cjEYnh+ijwI941QS5669VtTSSXOoyHWUO6JARIvSQ+A2yYFVdKEvTkKrMfaqdyOaw==",
+      "type": "package",
+      "path": "system.memory/4.5.0-preview1-26216-02",
+      "files": [
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netstandard1.1/System.Memory.dll",
+        "lib/netstandard1.1/System.Memory.xml",
+        "lib/netstandard2.0/System.Memory.dll",
+        "lib/netstandard2.0/System.Memory.xml",
+        "ref/netcoreapp2.1/System.Memory.dll",
+        "ref/netcoreapp2.1/System.Memory.xml",
+        "ref/netstandard1.1/System.Memory.dll",
+        "ref/netstandard1.1/System.Memory.xml",
+        "ref/netstandard2.0/System.Memory.dll",
+        "ref/netstandard2.0/System.Memory.xml",
+        "ref/uap10.0.16300/System.Memory.dll",
+        "ref/uap10.0.16300/System.Memory.xml",
+        "runtimes/unix/lib/netcoreapp2.1/System.Memory.dll",
+        "runtimes/unix/lib/netcoreapp2.1/System.Memory.xml",
+        "runtimes/win/lib/netcoreapp2.1/System.Memory.dll",
+        "runtimes/win/lib/netcoreapp2.1/System.Memory.xml",
+        "runtimes/win/lib/uap10.0.16300/System.Memory.dll",
+        "runtimes/win/lib/uap10.0.16300/System.Memory.xml",
+        "system.memory.4.5.0-preview1-26216-02.nupkg.sha512",
+        "system.memory.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Net.Http/4.3.0": {
       "sha512": "sYg+FtILtRQuYWSIAuNOELwVuVsxVyJGWQyOnlAzhV4xvhyFnON1bAzYYC+jjRW8JREM45R0R5Dgi8MTC5sEwA==",
       "type": "package",
@@ -10614,10 +10818,10 @@
         "system.net.sockets.nuspec"
       ]
     },
-    "System.Numerics.Vectors/4.4.0": {
-      "sha512": "UiLzLW+Lw6HLed1Hcg+8jSRttrbuXv7DANVj0DkL9g6EnnzbL75EB7EWsw5uRbhxd/4YdG8li5XizGWepmG3PQ==",
+    "System.Numerics.Vectors/4.5.0-preview1-26216-02": {
+      "sha512": "FGIOma5l5mVHfnG8Ry5k3WqjWeDGFp1381xGpqwyUBWLs6kzm9Jbss1dUIRoOG4SU55nC0/28toJcq1sYfxPRw==",
       "type": "package",
-      "path": "system.numerics.vectors/4.4.0",
+      "path": "system.numerics.vectors/4.5.0-preview1-26216-02",
       "files": [
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
@@ -10625,7 +10829,6 @@
         "lib/MonoTouch10/_._",
         "lib/net46/System.Numerics.Vectors.dll",
         "lib/net46/System.Numerics.Vectors.xml",
-        "lib/netcoreapp2.0/_._",
         "lib/netstandard1.0/System.Numerics.Vectors.dll",
         "lib/netstandard1.0/System.Numerics.Vectors.xml",
         "lib/netstandard2.0/System.Numerics.Vectors.dll",
@@ -10640,7 +10843,6 @@
         "ref/MonoTouch10/_._",
         "ref/net46/System.Numerics.Vectors.dll",
         "ref/net46/System.Numerics.Vectors.xml",
-        "ref/netcoreapp2.0/_._",
         "ref/netstandard1.0/System.Numerics.Vectors.dll",
         "ref/netstandard1.0/System.Numerics.Vectors.xml",
         "ref/netstandard2.0/System.Numerics.Vectors.dll",
@@ -10649,7 +10851,7 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.numerics.vectors.4.4.0.nupkg.sha512",
+        "system.numerics.vectors.4.5.0-preview1-26216-02.nupkg.sha512",
         "system.numerics.vectors.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -11326,10 +11528,10 @@
         "system.runtime.nuspec"
       ]
     },
-    "System.Runtime.CompilerServices.Unsafe/4.4.0": {
-      "sha512": "9dLLuBxr5GNmOfl2jSMcsHuteEg32BEfUotmmUkmZjpR3RpVHE8YQwt0ow3p6prwA1ME8WqDVZqrr8z6H8G+Kw==",
+    "System.Runtime.CompilerServices.Unsafe/4.5.0-preview1-26216-02": {
+      "sha512": "YH6QzLUg6VzyejRsW9no/xlulcpKjfOC27jWmijyhw8A42ldukXHQDSaE0CP+khK0m2iqAaXoQ0BU49FUDw7Lw==",
       "type": "package",
-      "path": "system.runtime.compilerservices.unsafe/4.4.0",
+      "path": "system.runtime.compilerservices.unsafe/4.5.0-preview1-26216-02",
       "files": [
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
@@ -11341,7 +11543,7 @@
         "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
         "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
         "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
-        "system.runtime.compilerservices.unsafe.4.4.0.nupkg.sha512",
+        "system.runtime.compilerservices.unsafe.4.5.0-preview1-26216-02.nupkg.sha512",
         "system.runtime.compilerservices.unsafe.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -13388,7 +13590,9 @@
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.3",
       "NHibernate >= 5.1.1",
-      "Newtonsoft.Json >= 11.0.2"
+      "Newtonsoft.Json >= 11.0.2",
+      "SixLabors.ImageSharp >= 1.0.0-beta0003",
+      "SixLabors.ImageSharp.Drawing >= 1.0.0-beta0003"
     ]
   },
   "packageFolders": {
@@ -13461,6 +13665,14 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[11.0.2, )"
+          },
+          "SixLabors.ImageSharp": {
+            "target": "Package",
+            "version": "[1.0.0-beta0003, )"
+          },
+          "SixLabors.ImageSharp.Drawing": {
+            "target": "Package",
+            "version": "[1.0.0-beta0003, )"
           }
         },
         "imports": [

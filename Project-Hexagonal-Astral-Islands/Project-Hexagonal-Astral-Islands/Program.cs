@@ -45,6 +45,17 @@ namespace Project_Hexagonal_Astral_Islands
         public static readonly int RandomPlantlifeUpperBound = 100;
         public static readonly int RandomPlantlifeLowerBound = 0;
 
+        public static readonly int HotTBound = 33;
+        public static readonly int ColdTBound = -15;
+
+        public static readonly int MountainsHBound = 60;
+        public static readonly int OceanHBound = -25;
+
+        public static readonly int OceanWBound = 70;
+
+        public static readonly int ForestPlBound = 60;
+        public static readonly int DesertPlBound = 30;
+
     }
 
     public class LandProperties
