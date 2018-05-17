@@ -25,34 +25,37 @@ namespace Project_Hexagonal_Astral_Islands.Controllers
         public async Task<IActionResult> Index()
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);
-            string result = "";
-            Map map;
-            using (ISession session = NHibernateHelper.OpenSession()){ 
+            
+            //Map map;
+            //using (ISession session = NHibernateHelper.OpenSession("LOW")){ 
 
-            var maps = session.Query<Map>();
+            //var maps = session.Query<Map>();
 
-            try
-            {
-                map = maps.Select(u => u).Where(u => u.ID == user.my_map_id).First();
-            }
-            catch (InvalidOperationException) {
-                map = null;
-            }
-            if (map == null)
-            {
-                map = new Map();
-                map.GenerateNew(session);
-                user.my_map_id = (int)session.Save(map);
-            }
-            map = maps.Select(u => u).Where(u => u.ID == user.my_map_id).First();
+            //try
+            //{
+            //    map = maps.Select(u => u).Where(u => u.ID == user.my_map_id).First();
+            //}
+            //catch (InvalidOperationException) {
+            //    map = null;
+            //}
+            //if (map == null)
+            //{
+            //    map = new Map();
+            //    map.GenerateNew(session,5);
+            //    user.my_map_id = (int)session.Save(map);
+            //}
+            //map = maps.Select(u => u).Where(u => u.ID == user.my_map_id).First();
+            //    foreach (Unit u in map.AllUnits) {
+            //        u.RetreiveStatsFromType();
+            //    }
 
-                /*foreach (var kvp in map.Hcd)
-                {
-                    result = result + kvp.Key.ToString() + ": " + kvp.Value.ToString() + "\n";
-                }*/
+            //    /*foreach (var kvp in map.Hcd)
+            //    {
+            //        result = result + kvp.Key.ToString() + ": " + kvp.Value.ToString() + "\n";
+            //    }*/
 
-                ViewData["MapLoc"] = ImageGen.GenerateImage(map);
-            }
+                
+            //}
 
             /* 
              string result = "Пользователь не обнаружен";
@@ -62,9 +65,45 @@ namespace Project_Hexagonal_Astral_Islands.Controllers
                  }
 
              }*/
+            ViewData["MapId"] = user.my_map_id;
+            KeyValuePair<string, Microsoft.Extensions.Primitives.StringValues> k = new KeyValuePair<string, Microsoft.Extensions.Primitives.StringValues> ( "Cache-Control",  "private, max-age=0, must-revalidate");
+
+            HttpContext.Response.Headers.Add(k);
             return View();
         }
 
+
+        public ActionResult Image(int? id) {
+            //Map map;
+            //using (ISession session = NHibernateHelper.OpenSession("LOW"))
+            //{
+
+            //    var maps = session.Query<Map>();
+
+
+            //    map = maps.Select(u => u).Where(u => u.ID == id).First();
+            //    foreach (Unit u in map.AllUnits)
+            //    {
+            //        u.RetreiveStatsFromType();
+            //    }
+
+            /*foreach (var kvp in map.Hcd)
+            {
+                result = result + kvp.Key.ToString() + ": " + kvp.Value.ToString() + "\n";
+            }*/
+
+
+            // }
+            Response.Headers.Add("Refresh",$"{Constants.MapUpdateInterval}");
+            try
+            {
+                FileStreamResult streamResult = new FileStreamResult(new System.IO.FileStream($"./wwwroot/generatedmaps/map{id}.png", System.IO.FileMode.Open, System.IO.FileAccess.Read,System.IO.FileShare.ReadWrite), "image/png");
+                return streamResult;
+            }
+            catch {
+                return new FileStreamResult(new System.IO.FileStream($"./wwwroot/generatedmaps/map{id}.png", System.IO.FileMode.OpenOrCreate), "image/png"); ;
+            }
+        }
            
     }
 }

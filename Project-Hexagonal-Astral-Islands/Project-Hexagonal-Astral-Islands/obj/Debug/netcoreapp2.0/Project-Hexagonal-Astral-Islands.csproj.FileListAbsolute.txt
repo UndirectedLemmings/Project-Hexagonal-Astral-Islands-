@@ -10,3 +10,4 @@ D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\P
 D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\obj\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.pdb
 D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\obj\Debug\netcoreapp2.0\Project-Hexagonal-Astral-Islands.csprojAssemblyReference.cache
 D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+D:\Projects\Project-Hexagonal-Astral-Islands-\Project-Hexagonal-Astral-Islands\Project-Hexagonal-Astral-Islands\bin\Debug\netcoreapp2.0\UnitTypes.xml

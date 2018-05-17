@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DTypes>
+  <Dungeon>
+    <id>0</id>
+    <name>wolflair</name>
+    <displayed>Волчье логово</displayed>
+    <unitId>2</unitId>
+    <garrison>12</garrison>
+    <income>4</income>
+    <interval>6</interval>
+    <raiders>8</raiders>
+    <threat>7</threat>
+    <loot>
+      <Gold>0</Gold>
+      <Food>50</Food>
+      <Wood>0</Wood>
+      <Stone>0</Stone>
+      <Iron>0</Iron>
+      <Mana>0</Mana>
+  </loot>
+  </Dungeon>
+  <Dungeon>
+    <id>1</id>
+    <name>bearlair</name>
+    <displayed>Медвежье логово</displayed>
+    <unitId>3</unitId>
+    <garrison>6</garrison>
+    <income>2</income>
+    <interval>9</interval>
+    <raiders>3</raiders>
+    <threat>8</threat>
+    <loot>
+      <Gold>0</Gold>
+      <Food>80</Food>
+      <Wood>20</Wood>
+      <Stone>0</Stone>
+      <Iron>0</Iron>
+      <Mana>0</Mana>
+  </loot>
+  </Dungeon>
+</DTypes>
+

@@ -17,6 +17,35 @@ namespace Project_Hexagonal_Astral_Islands
     {
         public static void Main(string[] args)
         {
+            
+            var startTimeSpan = TimeSpan.Zero;
+            var periodTimeSpan = TimeSpan.FromSeconds(Constants.MapUpdateInterval);
+
+            var timer = new System.Threading.Timer(
+                e =>
+                {
+                    using (ISession session = NHibernateHelper.OpenSession())
+                    {
+                        
+                            IQueryable<Map> maps = session.Query<Map>();
+                            Console.WriteLine("Map updating started");
+                            foreach (Map m in maps)
+                            {
+                                Console.WriteLine($"Updating map {m.ID}...");
+                                m.UpdateAll(session);
+                            ImageGen.GenerateImage(m);
+                                session.Update(m);
+                            }
+                          
+
+                    }
+                    Console.WriteLine("=========Maps updated========");
+                },
+                null,
+                startTimeSpan,
+                periodTimeSpan
+                );
+
             BuildWebHost(args).Run();
         }
 
@@ -28,6 +57,9 @@ namespace Project_Hexagonal_Astral_Islands
 
     public static class Constants
     {
+
+        public static readonly int MapUpdateInterval = 90;
+
         public static readonly int TemperatureDifferenceDivider = 5;
         public static readonly int HeightDifferenceDivider = 20;
         public static readonly int WaterDifferenceDivider = 10;
@@ -56,6 +88,13 @@ namespace Project_Hexagonal_Astral_Islands
         public static readonly int ForestPlBound = 60;
         public static readonly int DesertPlBound = 30;
 
+
+        public static readonly int MediumCivBound = 50;
+        public static readonly int BigCivBound = 100;
+
+        public static IReadOnlyList<int> DungeonsTier0 = new List<int>(new[]{0,1});
+
+        public static readonly int DungeonGenerationPercent = 3;
     }
 
     public class LandProperties
@@ -177,12 +216,30 @@ namespace Project_Hexagonal_Astral_Islands
         private bool isVoid = true;
         private Coords _coords;
 
+        
+
         public virtual LandProperties Land_properties { get => land_properties; set => land_properties = value; }
         public virtual long ID { get => iD; set => iD = value; }
         public virtual Map Map { get => _map; set => _map = value; }
         public virtual bool Unchangable { get => unchangable; set => unchangable = value; }
         public virtual bool IsVoid { get => isVoid; set => isVoid = value; }
         public virtual Coords coords { get => _coords; set => _coords = value; }
+        public virtual Unit Unit { get; set; }
+        public virtual Dungeon Dungeon { get; set; }
+        public virtual Settlement Settlement { get; set; }
+
+        public Hex() {
+            Land_properties = new LandProperties();
+            Land_properties.My_hex = this;
+            ID = 0;
+            Map = null;
+            Unchangable = true;
+            IsVoid = true;
+            coords = new Coords();
+            Unit = null;
+            Dungeon = null;
+            Settlement = null;
+        }
 
         public static void NudgeParameters(Hex first, Hex second)
         {
@@ -252,6 +309,60 @@ namespace Project_Hexagonal_Astral_Islands
             return "Land Properties:\n" + Land_properties.ToString() + $"\nUnchangable:{unchangable}\nisVoid:{isVoid}";
         }
 
+        public virtual Settlement AddStartingSettlement() {
+            Settlement = new Settlement();
+            Settlement.Team = $"native{Map.ID}";
+            Settlement.Population = new Population
+            {
+                Humans = 35,
+                Beastfolk = 0,
+                Undead = 0,
+                Lawful = 0,
+                Chaotic = 0
+            };
+            Settlement.Housing = 35;
+            Settlement.MyHex = this;
+            Settlement.ID = 0;
+            Lock();
+            return Settlement;
+        }
+
+
+        public virtual Unit StartingUnit() {
+            Unit unit = Unit.NewFromTypes(1);
+            unit.ID = 0;
+            unit.Alive = 20;
+            unit.Origin = coords;
+            unit.Target = coords;
+            unit.Intention = Unit.Intent.Settle;
+            unit.Carrying = new Ress
+            {
+                Food = 200,
+                Wood = 200,
+                Stone = 100,
+                Gold = 20,
+                Iron = 20
+            };
+            unit.My_hex = this;
+            this.Unit = unit;
+            return this.Unit;
+        }
+        public virtual Dungeon RandomizeDungeon() {
+            Dungeon d = null;
+            if (Settlement != null)
+                return null;
+            if (Land_properties.Height < Constants.OceanHBound && Land_properties.Water > Constants.OceanWBound)
+            {
+                return null;
+            }
+            Random random = new Random();
+            int type = Constants.DungeonsTier0[random.Next(Constants.DungeonsTier0.Count)];
+            d = Dungeon.FromTypes(type);
+            d.Team = $"monsters{Map.ID}";
+            d.My_hex = this;
+            Dungeon = d;
+            return d;
+        }
     }
 
     public class Coords
@@ -275,7 +386,9 @@ namespace Project_Hexagonal_Astral_Islands
                 return list;
             }
         }
-
+        public static int Distance(Coords from, Coords to) {
+            return Math.Abs(to.X-from.X) + Math.Abs(to.Y - from.Y);
+        }
         public virtual int X { get => x; set => x = value; }
         public virtual int Y { get => y; set => y = value; }
         public virtual long ID { get => iD; set => iD = value; }
@@ -315,15 +428,71 @@ namespace Project_Hexagonal_Astral_Islands
         }
     }
 
+    public enum Domain {
+        Life,
+        Death,
+        Chaos,
+        Law
+    }
 
     
     public class Map
     {
         IDictionary<Coords, Hex> hcd;
-        private int iD;
+        private long iD;
+        private int tier=0;
 
-        public virtual int ID { get => iD; set => iD = value; }
+        public virtual long ID { get => iD; set => iD = value; }
         public virtual IDictionary<Coords, Hex> Hcd { get => hcd; set => hcd = value; }
+        public virtual int Radius { get; set; }
+        public virtual Domain Domain { get; set; }
+        public virtual int Tier { get => tier; set => tier = value; }
+
+        public virtual int MaxDungeonCount
+        {
+            get
+            {
+                return Hcd.Count / 15;
+                }
+        }
+
+        public virtual List<Settlement> AllSettlements {
+            get {
+                List<Settlement> settlements = new List<Settlement>();
+                foreach (Hex h in Hcd.Values) {
+                    if (h.Settlement != null) {
+                        settlements.Add(h.Settlement);
+                    }
+                }
+                return settlements;
+            }
+        }
+
+        public virtual List<Dungeon> AllDungeons {
+            get {
+                List<Dungeon> dungeons = new List<Dungeon>();
+                foreach (Hex h in Hcd.Values) {
+                    if (h.Dungeon != null) {
+                        dungeons.Add(h.Dungeon);
+                    }
+                }
+                return dungeons;
+            }
+        }
+
+        public virtual List<Unit> AllUnits {
+            get {
+                List<Unit> units = new List<Unit>();
+                foreach (Hex h in Hcd.Values) {
+                    if (h.Unit != null) {
+                        units.Add(h.Unit);
+                    }
+                }
+                return units;
+            }
+        }
+
+        
 
         public Map() {
             Console.WriteLine("Map constructor satarted");
@@ -365,14 +534,14 @@ namespace Project_Hexagonal_Astral_Islands
 
         
 
-        public virtual void GenerateNew(ISession session)
+        public virtual void GenerateNew(ISession session, int radius)
         {
             Console.WriteLine("GenerateNew() started");
                 Hcd.Clear();
-            
-                for (int y = -5; y < 0; y++)
+            Radius = radius;
+                for (int y = -radius; y < 0; y++)
                 {
-                    for (int x = 5; x >= -y - 5; x--)
+                    for (int x = radius; x >= -y - radius; x--)
                     {
 
                         Coords c;
@@ -394,9 +563,9 @@ namespace Project_Hexagonal_Astral_Islands
 
                     }
                 }
-                for (int y = 0; y < 6; y++)
+                for (int y = 0; y < radius+1; y++)
                 {
-                    for (int x = -5; x <= -y + 5; x++)
+                    for (int x = -radius; x <= -y + radius; x++)
                     {
                         Coords c;
                         c = new Coords(x, y);
@@ -407,7 +576,9 @@ namespace Project_Hexagonal_Astral_Islands
                         h.Unlock();
                         h.coords = c;
                         h.Map = this;
-                        //c.hex = h;
+                    //c.hex = h;
+                    
+
                         session.Save(h);
                         session.Save(c);
                         Hcd.Add(c, h);
@@ -417,15 +588,19 @@ namespace Project_Hexagonal_Astral_Islands
                 Console.WriteLine("Total hexes generated: " + Hcd.Count.ToString());
 
                 Hex H = Hcd[new Coords(0, 0)];
-                H.Lock();
-                session.UpdateAsync(H);
+            LandProperties lp = H.Land_properties;
+            if (lp.Height < Constants.OceanHBound && lp.Water > Constants.OceanWBound)
+            {
+                H.ChangeWater(-lp.Water / 2);
+            }
+            
+            
                
         }
 
-        public virtual void ChangeLandscape()
+        public virtual void ChangeLandscape(ISession session)
         {
-            using (ISession session = NHibernateHelper.OpenSession())
-            {
+           
                 foreach (var kvp in Hcd)
                 {
                     Hex center = kvp.Value;
@@ -437,52 +612,70 @@ namespace Project_Hexagonal_Astral_Islands
                     }
 
                 }
+            
+        }
+
+        public virtual void AddDungeons(ISession session) {
+            if (AllDungeons.Count >= MaxDungeonCount)
+                return;
+            foreach (var h in Hcd.Values) {
+                Random random = new Random();
+                if (random.Next(100) < Constants.DungeonGenerationPercent) {
+                    var d = h.RandomizeDungeon();
+                    if (d != null) {
+                        session.Save(d);
+                        session.Update(h);
+                    }
+                }
+            }
+
+        }
+        public virtual void UpdateUnits(ISession session) {
+            foreach (var u in AllUnits) {
+                if (!u.StatsRetrieved)
+                {
+                    u.RetreiveStatsFromType();
+                }
+            }
+            foreach (var u in AllUnits) {
+                u.Update(session);
+            }
+
+        }
+
+        public virtual void UpdateSettlements(ISession session) {
+            foreach (var s in AllSettlements) {
+                s.Update(session);
             }
         }
 
-    }
-    public class MapMap:ClassMap<Map> {
-
-        public MapMap() {
-            Id(x => x.ID);
-            HasMany(x => x.Hcd)
-                .AsEntityMap("CoordsID")
-                .KeyColumn("MapID")
-                .Cascade.All();
+        public virtual void UpdateDungeons(ISession session) {
+            foreach (var d in AllDungeons) {
+                d.Update(session);
+            }
         }
 
-    }
-
-    public class HexMap : ClassMap<Hex> {
-        public HexMap() {
-            Id(x => x.ID);
-            Map(x => x.Unchangable);
-            Map(x => x.IsVoid);
-            References(x => x.Map);
-            HasOne(x => x.Land_properties)
-                .Cascade.All();
-            References(x => x.coords);
+        public virtual void UpdateAll(ISession session) {
+            if (AllSettlements.Count == 0) {
+                Settlement s = Hcd[new Coords(0, 0)].AddStartingSettlement();
+                Unit u = Hcd[new Coords(0, 0)].StartingUnit();
+                session.Save(s.Resources);
+                session.Save(s.Population);
+                session.Save(u.Carrying);
+                session.Save(u);
+                foreach (Building b in s.Buildings) {
+                    session.Save(b);
+                }
+                session.Save(s);
+            }
+            UpdateUnits(session);
+            UpdateSettlements(session);
+            UpdateDungeons(session);
+            ChangeLandscape(session);
+            AddDungeons(session);
         }
     }
-
-    public class LPMAP : ClassMap<LandProperties> {
-        public LPMAP() {
-            Id(x => x.ID);
-            Map(x => x.Temperature);
-            Map(x => x.Height);
-            Map(x => x.Water);
-            Map(x => x.Plantlife);
-            References(x => x.My_hex).Unique();
-        }
-    }
-
-    public class CMap : ClassMap<Coords> {
-        public CMap() {
-            Id(c => c.ID);
-            Map(c => c.X);
-            Map(c => c.Y);
-        }
-    }
+    
 
     
 

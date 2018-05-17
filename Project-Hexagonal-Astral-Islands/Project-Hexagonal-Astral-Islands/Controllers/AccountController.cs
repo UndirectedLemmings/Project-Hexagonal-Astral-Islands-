@@ -222,13 +222,18 @@ namespace Project_Hexagonal_Astral_Islands.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                int map_id;
+                Console.WriteLine("Model State valid");
+                long map_id;
                 using (ISession s = NHibernateHelper.OpenSession()) {
                     using (ITransaction t = s.BeginTransaction())
                     {
+                        Console.WriteLine("Creating new map...");
                         Map m = new Map();
-                        m.GenerateNew(s);
-                        map_id = (int)s.Save(m);
+                        Console.WriteLine("Generating...");
+                        m.GenerateNew(s,10);
+                        Console.WriteLine("Saving...");
+                        map_id = (long)s.Save(m);
+                        ImageGen.GenerateImage(m);
                         t.Commit();
                     }
                 }

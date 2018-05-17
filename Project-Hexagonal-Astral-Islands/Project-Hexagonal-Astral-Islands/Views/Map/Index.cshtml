@@ -4,5 +4,14 @@
 }
 
 <h2>MapView</h2>
-
-<img src=@Url.Content(String.Format("~/generatedmaps/{0}",ViewData["MapLoc"])) alt="Loading..."/>
+<div>
+    <!---->
+    <script>
+        var timer = window.setInterval(reloadMap(), 90000);
+        function reloadMap() { 
+            frames["map"].location.reload(true);
+        }
+    </script>
+    <iframe src=@Url.Action("Image",new {id=ViewData["MapId"]}) alt="Loading..." name="map" width="1344" height="1000">
+    </iframe>
+</div>

@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Project_Hexagonal_Astral_Islands.Data;
 using System;
 
-namespace Project_Hexagonal_Astral_Islands.Data.Migrations
+namespace ProjectHexagonalAstralIslands.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180506161545_InitialCreate")]
-    partial class InitialCreate
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,7 +168,7 @@ namespace Project_Hexagonal_Astral_Islands.Data.Migrations
 
                     b.Property<int>("mana");
 
-                    b.Property<int>("my_map_id");
+                    b.Property<long>("my_map_id");
 
                     b.HasKey("Id");
 

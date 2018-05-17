@@ -6,6 +6,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing.Drawing;
 using SixLabors.ImageSharp.Processing.Transforms;
+using SixLabors.ImageSharp.Formats;
 using SixLabors.Primitives;
 using Project_Hexagonal_Astral_Islands;
 using SixLabors.ImageSharp.Processing;
@@ -18,10 +19,12 @@ public class ImageGen
             throw new ArgumentNullException("map");
         }
         string result ="./wwwroot/generatedmaps/map" + map.ID.ToString() + ".png";
-        Image<Rgba32> image = new Image<Rgba32>(320,320);
+        int Width = (map.Radius*2+1)*isizex;
+        int Height = (map.Radius * 2 + 1) * isizey;
+        Image<Rgba32> image = new Image<Rgba32>(Width, Height);
         Point center = new Point();
-        center.X = 160 - isizex;
-        center.Y = 160 - isizey;
+        center.X = Width/2-xdelta;
+        center.Y = Height/2 - isizey;
         foreach (var kvp in map.Hcd) {
             Point target = center;
             target.X += (kvp.Key.X * xdelta*2)+(kvp.Key.Y*xdelta);
@@ -39,18 +42,18 @@ public class ImageGen
                 }
                 else {
                     if (lp.Plantlife > Constants.ForestPlBound) {
-                        biome_name = "forest_no_civ"; //add civilisation level later
+                        biome_name = "forest"; //add civilisation level later
 
                     }
                     else
                     {
                         if (lp.Plantlife<Constants.DesertPlBound)
                         {
-                            biome_name = "desert_no_civ";
+                            biome_name = "desert";
                         }
                         else
                         {
-                            biome_name = "field_no_civ";
+                            biome_name = "field";
                         }
                     }
                     if (lp.Temperature > Constants.HotTBound) {
@@ -62,17 +65,61 @@ public class ImageGen
                 }
             }
 
-            biome_name = "./wwwroot/images/Mapgen/"+biome_name + ".png";
+            biome_name = "./wwwroot/images/Mapgen/biomes/"+biome_name + ".png";
             Image<Rgba32> biome = Image.Load(biome_name);
 
             image.Mutate(i => i.DrawImage(biome, 1f, target));
+            biome.Dispose();
+            Settlement s = kvp.Value.Settlement;
+            if (s != null) {
+                string c = "./wwwroot/images/Mapgen/civs/";
+                if (s.Housing < Constants.MediumCivBound) {
+                    c = c + "small_civ.png";
+                }
+                else if (s.Housing < Constants.BigCivBound&&s.Housing>=Constants.MediumCivBound) {
+                    c = c + "medium_civ.png";
+                }
+                else {
+                    c = c + "big_civ.png";
+                }
+                Image<Rgba32> set = Image.Load(c);
+                image.Mutate(i => i.DrawImage(set, 1f, target));
+                set.Dispose();
+                foreach (Building b in s.Buildings) {
+                    if (b != null)
+                    {
+                        string bname = $"./wwwroot/images/Mapgen/buildings/{b.Name}.png";
+                        Image<Rgba32> dun = Image.Load(bname);
+                        image.Mutate(i => i.DrawImage(dun, 1f, target));
+                        dun.Dispose();
+                    }
+                }
                 
+            }
+            Dungeon d = kvp.Value.Dungeon;
+            if (d != null) {
+                string c = $"./wwwroot/images/Mapgen/dungeons/{d.Name}.png";
+                Image<Rgba32> dun = Image.Load(c);
+                image.Mutate(i => i.DrawImage(dun,1f,target));
+                dun.Dispose();
+            }
+            Unit u = kvp.Value.Unit;
+            if (u != null)
+            {
+                string c = $"./wwwroot/images/Mapgen/units/{u.Name}.png";
+                Image<Rgba32> dun = Image.Load(c);
+                image.Mutate(i => i.DrawImage(dun, 1f, target));
+                dun.Dispose();
+            }
+
         }
         ResizeOptions resizeOptions = new ResizeOptions();
-        resizeOptions.Size = new Size(320 * resizeFactor, 320 * resizeFactor);
+        resizeOptions.Size = new Size(Width * resizeFactor, Height * resizeFactor);
         resizeOptions.Sampler = KnownResamplers.NearestNeighbor;
         image.Mutate(i => i.Resize(resizeOptions));
-        image.Save(result);
+        System.IO.Stream stream = new System.IO.FileStream(result, System.IO.FileMode.OpenOrCreate,System.IO.FileAccess.ReadWrite,System.IO.FileShare.Read);
+        IImageEncoder imageEncoder = new SixLabors.ImageSharp.Formats.Png.PngEncoder();
+        image.Save(stream,imageEncoder);
         return $"map{map.ID}.png";
     }
     }

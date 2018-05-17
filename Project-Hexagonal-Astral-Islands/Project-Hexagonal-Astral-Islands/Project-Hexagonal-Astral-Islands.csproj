@@ -5,6 +5,24 @@
     <UserSecretsId>aspnet-Project_Hexagonal_Astral_Islands-86A7935F-5594-40EF-873F-8E68F5115A7E</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="UnitTypes.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="UnitTypes.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="FluentNHibernate" Version="2.1.2" />

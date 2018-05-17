@@ -10,7 +10,7 @@ namespace Project_Hexagonal_Astral_Islands.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-        public int my_map_id { get; set; }
+        public long my_map_id { get; set; }
         public int mana { get; set; }
     }
 }
