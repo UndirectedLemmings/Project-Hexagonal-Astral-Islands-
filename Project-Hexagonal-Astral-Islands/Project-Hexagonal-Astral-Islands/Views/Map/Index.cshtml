@@ -7,11 +7,16 @@
 <div>
     <!---->
     <script>
-        var timer = window.setInterval(reloadMap(), 90000);
+        var timer = window.setInterval(reloadMap(), @ViewData["UpdateInterval"]);
+        updateCount = 0;
         function reloadMap() { 
-            frames["map"].location.reload(true);
+            frames[0].location.reload(true);
+            
+            updateCount += 1;
+            document.getElementById("updateCount").innerText = "Update count: " + updateCount;
         }
     </script>
-    <iframe src=@Url.Action("Image",new {id=ViewData["MapId"]}) alt="Loading..." name="map" width="1344" height="1000">
+    <p id="updateCount">Update count: 0</p>
+    <iframe src=@Url.Action("Image",new {id=ViewData["MapId"]}) alt="Loading..." id="map" width="1344" height="1000">
     </iframe>
 </div>

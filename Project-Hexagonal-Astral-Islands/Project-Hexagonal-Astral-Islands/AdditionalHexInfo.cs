@@ -255,7 +255,15 @@ namespace Project_Hexagonal_Astral_Islands
                             session.Update(this);
                             break;
                         case Intent.Settle:
-                            session.Update(Settle());
+                            Settlement s = Settle();
+                            if (s.ID == 0)
+                            {
+                                session.Save(s);
+                            }
+                            else
+                            {
+                                session.Update(s);
+                            }
                             //session.Delete(this);
                             break;
                         case Intent.RaidSettlementFD:
@@ -798,6 +806,7 @@ namespace Project_Hexagonal_Astral_Islands
     {
 
         public static readonly int maxBuildings = 3;
+        public static readonly int maxColonyDistance = 3;
 
         int housing;
         Population population;
@@ -1022,7 +1031,7 @@ namespace Project_Hexagonal_Astral_Islands
             }
             else {
                 Random random = new Random();
-                if (random.Next(Population.Total+Housing)>= Housing) {
+                if (random.Next(100)<Constants.SendColonisatorsPercent) {
                     List<Coords> coords = MyHex.Map.Hcd.Keys.ToList();
                     Coords c= null;
                     bool unsuitable = true;
@@ -1034,6 +1043,7 @@ namespace Project_Hexagonal_Astral_Islands
                         unsuitable = unsuitable || (lp.Height < Constants.OceanHBound && lp.Water > Constants.OceanWBound); //not ocean
                         unsuitable = unsuitable || h.Dungeon != null; // not atop of a dungeon
                         unsuitable = unsuitable || c == MyHex.coords; // not the same hex
+                        unsuitable = unsuitable || Coords.Distance(MyHex.coords, c) > maxColonyDistance;
                     }
                     Unit unit = SendUnit(c,Unit.Intent.Settle,Population.Total/5,MaterialsRequired(Population.Total / 5+10,0));
                     if (unit != null)

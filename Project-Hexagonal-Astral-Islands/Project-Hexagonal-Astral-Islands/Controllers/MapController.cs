@@ -66,6 +66,7 @@ namespace Project_Hexagonal_Astral_Islands.Controllers
 
              }*/
             ViewData["MapId"] = user.my_map_id;
+            ViewData["UpdateInterval"] = Constants.MapUpdateInterval * 1000;
             KeyValuePair<string, Microsoft.Extensions.Primitives.StringValues> k = new KeyValuePair<string, Microsoft.Extensions.Primitives.StringValues> ( "Cache-Control",  "private, max-age=0, must-revalidate");
 
             HttpContext.Response.Headers.Add(k);

@@ -24,6 +24,7 @@ namespace Project_Hexagonal_Astral_Islands
             var timer = new System.Threading.Timer(
                 e =>
                 {
+                    DateTime start = DateTime.Now;
                     using (ISession session = NHibernateHelper.OpenSession())
                     {
                         
@@ -39,7 +40,8 @@ namespace Project_Hexagonal_Astral_Islands
                           
 
                     }
-                    Console.WriteLine("=========Maps updated========");
+                    TimeSpan diff = DateTime.Now - start;
+                    Console.WriteLine($"=========Maps updated in {diff.TotalSeconds} seconds========");
                 },
                 null,
                 startTimeSpan,
@@ -58,7 +60,7 @@ namespace Project_Hexagonal_Astral_Islands
     public static class Constants
     {
 
-        public static readonly int MapUpdateInterval = 90;
+        public static readonly int MapUpdateInterval = 15;
 
         public static readonly int TemperatureDifferenceDivider = 5;
         public static readonly int HeightDifferenceDivider = 20;
@@ -95,6 +97,7 @@ namespace Project_Hexagonal_Astral_Islands
         public static IReadOnlyList<int> DungeonsTier0 = new List<int>(new[]{0,1});
 
         public static readonly int DungeonGenerationPercent = 3;
+        public static readonly int SendColonisatorsPercent = 75; //turn down later
     }
 
     public class LandProperties

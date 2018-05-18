@@ -13,12 +13,22 @@ using SixLabors.ImageSharp.Processing;
 
 public class ImageGen
     {
+
+    public static List<string> beingGenerated = new List<string>();
+
     public static string GenerateImage(Map map,int xdelta=8,int ydelta=12,int isizex=16,int isizey=16, int resizeFactor=4) {
 
         if (map == null) {
             throw new ArgumentNullException("map");
         }
         string result ="./wwwroot/generatedmaps/map" + map.ID.ToString() + ".png";
+        if (beingGenerated.Contains(result))
+        {
+            return "";
+        }
+        else {
+            beingGenerated.Add(result);
+        }
         int Width = (map.Radius*2+1)*isizex;
         int Height = (map.Radius * 2 + 1) * isizey;
         Image<Rgba32> image = new Image<Rgba32>(Width, Height);
@@ -117,10 +127,29 @@ public class ImageGen
         resizeOptions.Size = new Size(Width * resizeFactor, Height * resizeFactor);
         resizeOptions.Sampler = KnownResamplers.NearestNeighbor;
         image.Mutate(i => i.Resize(resizeOptions));
-        System.IO.Stream stream = new System.IO.FileStream(result, System.IO.FileMode.OpenOrCreate,System.IO.FileAccess.ReadWrite,System.IO.FileShare.Read);
+        System.IO.Stream stream = GetStream(result, 5000);
         IImageEncoder imageEncoder = new SixLabors.ImageSharp.Formats.Png.PngEncoder();
         image.Save(stream,imageEncoder);
+        beingGenerated.Remove(result);
         return $"map{map.ID}.png";
     }
+
+    static System.IO.Stream GetStream(string path,int timeoutMs) {
+        var time = System.Diagnostics.Stopwatch.StartNew();
+
+        while (time.ElapsedMilliseconds < timeoutMs) {
+            try
+            {
+                new System.IO.FileStream(path, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite, System.IO.FileShare.Read);
+            }
+            catch (System.IO.IOException e) {
+                if (e.HResult != -2147024864)
+                    throw;
+
+            }
+        }
+        throw new TimeoutException($"Failed to get {path} within {timeoutMs} ms");
+    }
+
     }
 
