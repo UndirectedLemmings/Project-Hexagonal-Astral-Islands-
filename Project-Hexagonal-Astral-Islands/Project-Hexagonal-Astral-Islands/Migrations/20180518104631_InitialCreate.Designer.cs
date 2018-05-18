@@ -11,7 +11,7 @@ using System;
 namespace ProjectHexagonalAstralIslands.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180518063727_InitialCreate")]
+    [Migration("20180518104631_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

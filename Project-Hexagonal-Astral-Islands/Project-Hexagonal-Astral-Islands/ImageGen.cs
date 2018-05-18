@@ -131,6 +131,8 @@ public class ImageGen
         IImageEncoder imageEncoder = new SixLabors.ImageSharp.Formats.Png.PngEncoder();
         image.Save(stream,imageEncoder);
         beingGenerated.Remove(result);
+        stream.Dispose();
+        image.Dispose();
         return $"map{map.ID}.png";
     }
 
